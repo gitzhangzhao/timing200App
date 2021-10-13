@@ -1,0 +1,5 @@
+record(calc, "L:TM:calc:k1") {
+	field(SCAN,"Passive")
+	field(CALC, "floor(A/8)")
+	field(FLNK, "L:TM:test:er1.OT0D")
+}

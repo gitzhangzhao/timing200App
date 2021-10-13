@@ -1,0 +1,91 @@
+
+record(ai,"$(SUBSYS):$(DEVICE):ai:k1SetD") {
+   field(PREC, "0")
+   field(SCAN,"Passive")
+   field(FLNK, "$(SUBSYS):$(DEVICE):calc:k1SetD")
+   field(VAL, "1")
+}
+
+record(calcout,"$(SUBSYS):$(DEVICE):calc:k1SetD") {
+   field(PREC, "0")
+   field(SCAN,"Passive")
+   field(CALC, "FLOOR(A / 10)")
+   field(INPA, "$(SUBSYS):$(DEVICE):ai:k1SetD.VAL NPP")
+   field(OUT, "$(SUBSYS):$(DEVICE):er.OT4D PP")
+   field(OOPT, "Every Time")
+   field(FLNK, "$(SUBSYS):$(DEVICE):calc:k1SetTd4")
+}
+
+# set fine delay for k1 by setting td4v, step is 2 ns
+record(calcout,"$(SUBSYS):$(DEVICE):calc:k1SetTd4") {
+   field(PREC, "0")
+   field(SCAN,"Passive")
+   field(CALC, "CEIL((A % 10) / 2)")
+   field(INPA, "$(SUBSYS):$(DEVICE):ai:k1SetD NPP")
+   field(OUT, "R:TM:KeTd4_1:PRESET PP")
+   field(OOPT, "Every Time")
+   field(VAL, "1")
+}
+
+record(calcout,"$(SUBSYS):$(DEVICE):calc:k1Preset") {
+   field(CALC, "A+B+C-D+G")
+   field(INPA, "L:TM:GunEvr:er.OT1D")
+   field(INPB, "L:TM:GUNTX:CH1GETD")
+   field(INPC, "1072")
+# 1072 is electron traveling time from e-gun to end of linac
+   field(INPD, "R:TM:KeEvr:calc:k1Ref")
+   field(INPG, "1155")
+# 1155 is time diff between timingMain to timng102 and gunRx, and timingMain to timingKicker and K1
+}
+
+record(calcout,"$(SUBSYS):$(DEVICE):calc:k1Ref") {
+   field(CALC, "1741")
+
+}
+
+record(calcout,"$(SUBSYS):$(DEVICE):calc:k2Preset") {
+   field(CALC, "A+B+C-D+G")
+   field(INPA, "L:TM:GunEvr:er.OT1D")
+   field(INPB, "L:TM:GUNTX:CH1GETD")
+   field(INPC, "1072")
+# 1072 is electron traveling time from e-gun to end of linac
+   field(INPD, "R:TM:KeEvr:calc:k2Ref")
+   field(INPG, "1155")
+# 1155 is time diff between timingMain to timng102 and gunRx, and timingMain to ti
+mingKicker and K1
+}
+
+record(calcout,"$(SUBSYS):$(DEVICE):calc:k2Ref") {
+   field(CALC, "1778")
+}
+
+
+record(ai,"$(SUBSYS):$(DEVICE):ai:k2SetD") {
+   field(PREC, "0")
+   field(SCAN,"Passive")
+   field(FLNK, "$(SUBSYS):$(DEVICE):calc:k2SetD")
+   field(VAL, "1")
+}
+
+record(calcout,"$(SUBSYS):$(DEVICE):calc:k2SetD") {
+   field(PREC, "0")
+   field(SCAN,"Passive")
+   field(CALC, "FLOOR(A / 10)")
+   field(INPA, "$(SUBSYS):$(DEVICE):ai:k2SetD.VAL NPP")
+   field(OUT, "$(SUBSYS):$(DEVICE):er.OT5D PP")
+   field(OOPT, "Every Time")
+   field(FLNK, "$(SUBSYS):$(DEVICE):calc:k2SetTd4")
+}
+
+# set fine delay for k1 by setting td4v, step is 2 ns
+record(calcout,"$(SUBSYS):$(DEVICE):calc:k2SetTd4") {
+   field(PREC, "0")
+   field(SCAN,"Passive")
+   field(CALC, "CEIL((A % 10) / 2)")
+   field(INPA, "$(SUBSYS):$(DEVICE):ai:k2SetD NPP")
+   field(OUT, "R:TM:KeTd4_2:PRESET PP")
+   field(OOPT, "Every Time")
+   field(VAL, "1")
+}
+
+

@@ -1,0 +1,45 @@
+record(event, "$(SUBSYS):$(DEVICE):event:extEvt")
+{
+field(DESC, "external event")
+field(ASG, "")
+field(SCAN, "I/O Intr")
+field(PINI, "NO")
+field(PHAS, "0")
+field(EVNT, "0")
+field(TSE, "0")
+field(TSEL, "0")
+field(DTYP, "APS event receiver")
+field(DISV, "0")
+field(DISA, "1")
+field(SDIS, "0")
+field(DISS, "NO_ALARM")
+field(PRIO, "LOW")
+field(FLNK, "$(SUBSYS):$(DEVICE):calc:extEvt PP MS")
+field(INP, "#C$(ERslot) S118 @")
+field(SIOL, "0")
+field(SIML, "0")
+field(SIMS, "NO_ALARM")
+field(VAL, "118")
+}
+
+record(calc,"$(SUBSYS):$(DEVICE):calc:extEvt") {
+   field(PREC, "0")
+   field(DESC, "interlock count and TS")
+   field(SCAN,"Passive")
+   field(CALC, "(A<B)?(A+C):D")
+   field(INPA, "$(SUBSYS):$(DEVICE):calc:extEvt.VAL NPP MS")
+   field(INPB, "100000")
+   field(INPC, "1")
+   field(INPD, "0")
+   field(FLNK, "$(SUBSYS):$(DEVICE):disGtx:extEvt")
+}
+
+record(calcout,"$(SUBSYS):$(DEVICE):disGtx:extEvt") {
+   field(DESC, "disable Gtx ch1inp")
+   field(OOPT, "Every Time")
+   field(SCAN,"Passive")
+   field(CALC, "A")
+   field(INPA, "0")
+   field(OUT, "L:TM:GUNTX:CH1SETP PP")
+   field(FLNK, "L:TM:GUNTX:CH1SETP")
+}

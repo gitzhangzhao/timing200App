@@ -1,0 +1,43 @@
+# Makefile.Host
+TOP = ../../..
+include $(TOP)/config/CONFIG_APP
+#----------------------------------------
+#  ADD MACRO DEFINITIONS AFTER THIS LINE
+
+#----------------------------------------------------
+#  Optimization of db files using dbst (default: NO)
+#DB_OPT = YES
+
+#----------------------------------------------------
+#  Optimization needs the name of the appropriate
+#  dbd file (compare with ../src/Makefile.Vx)
+#DBDNAME = exampleApp.dbd
+
+#----------------------------------------------------
+# Add databases, templates, substitutions like this
+#DB += heartBeat200.db
+#DB += mainEvg200.db mainEvr200.db
+#DB += diamond_evg.db diamond_evr.db
+DB += bepciiTM_evg5.db bepciiTM_evr5.db bepciiTM_evr.db 
+#DB += evrBPMLinac.db evrGenSub.db evrTest.db TD4V.db
+DB += evrBPMLinac.db  evrTest.db TD4V.db
+DB += heartBeat5.db evrCalc1.db evrCalc2.db
+DB += evrStart.db evrModeMain.db
+DB += evrKlyStart.db
+DB += evrKly.db evrKly3.db evrGun.db
+DB += keStart.db kpStart.db kickerCalc.db evrCalcRBI.db
+DB += bepciiTM_evr230.db
+DB += evg4Rev.db evr4Rev.db
+DB += evrCalcMainGunT.db evrCalc2Main.db
+
+#----------------------------------------------------
+# Declare template files which do not show up in DB
+#USES_TEMPLATE += dbExample2.template
+
+#----------------------------------------------------
+# The following line is for local dbd expansion
+#DBDEXPAND = lgTimingInclude.dbd
+
+include $(TOP)/config/RULES.Db
+#----------------------------------------
+#  ADD RULES AFTER THIS LINE

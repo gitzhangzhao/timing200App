@@ -1,0 +1,50 @@
+
+record(event, "$(prefix):event1")
+{
+field(DESC, "")
+field(ASG, "")
+field(SCAN, "I/O Intr")
+field(PINI, "NO")
+field(PHAS, "0")
+field(EVNT, "0")
+field(TSE, "0")
+field(TSEL, "0")
+field(DTYP, "APS event receiver")
+field(DISV, "1")
+field(SDIS, "0")
+field(DISS, "NO_ALARM")
+field(PRIO, "LOW")
+field(FLNK, "$(prefix):calc4 PP MS")
+field(INP, "#C$(ERslot) S36 @")
+field(SIOL, "0")
+field(SIML, "0")
+field(SIMS, "NO_ALARM")
+#field(VAL, "125")
+}
+
+
+record(calc,"$(prefix):calc4") {
+    field(PREC, "0")
+    field(SCAN,"Passive")
+    field(CALC, "(A<B)?(A+C):D")
+    field(INPA, "$(prefix):calc4.VAL NPP MS")
+    field(INPB, "10000")
+    field(INPC, "1")
+    field(INPD, "0")
+    field(FLNK, "$(prefix):genSub:time")
+}
+
+record(genSub, "$(prefix):genSub:time") {
+    field(DESC, "recordCalc4Time")
+    field(SCAN, "Passive")
+    field(INAM, "TMsubCalcInit")
+    field(SNAM, "TMsubCalcProcess")
+    field(INPA, "$(prefix):calc4.VAL NPP NMS")
+    field(FTA, "STRING")
+    field(FTVA, "DOUBLE")
+    field(FTVB, "STRING") 
+#    field(FLNK, "Pn_dummy2") 
+}
+
+
+

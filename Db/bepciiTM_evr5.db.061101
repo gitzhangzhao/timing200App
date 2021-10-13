@@ -1,0 +1,161 @@
+# 2006/9/27, set OTP0-OPTD to Disabled at init, each station enable the trig 
+# outputs according to their needs
+# record(er, "$(SUBSYS):$(DEVICE):er$(No)")
+# L:TM:KlyEvr_n:er
+record(er, "$(SUBSYS):$(DEVICE):er") {
+  field(DTYP, "APS event receiver")
+  field(OUT, "#C$(ERslot) S0 @")
+  field(ENAB, "YES")
+  field(PINI, "YES")
+  field(SCAN, "Passive")
+  field(TRG0, "Disabled")
+  field(TRG1, "Disabled")
+  field(TRG2, "Disabled")
+  field(TRG3, "Disabled")
+  field(TRG4, "Disabled")
+  field(TRG5, "Disabled")
+  field(TRG6, "Disabled")
+  field(OTP0, "Disabled")
+  field(OTP1, "Disabled")
+  field(OTP2, "Disabled")
+  field(OTP3, "Disabled")
+  field(OTP4, "Disabled")
+  field(OTP5, "Disabled")
+  field(OTP6, "Disabled")
+  field(OTP7, "Disabled")
+  field(OTP8, "Enabled")
+  field(OTP9, "Enabled")
+  field(OTPA, "Enabled")
+  field(OTPB, "Enabled")
+  field(OTPC, "Enabled")
+  field(OTPD, "Enabled")
+  field(OTL0, "Disabled")
+  field(OTL1, "Disabled")
+  field(OTL2, "Disabled")
+  field(OTL3, "Disabled")
+  field(OTL4, "Disabled")
+  field(OTL5, "Disabled")
+  field(OTL6, "Disabled")
+  field(DG0E, "Disabled")
+  field(DG1E, "Disabled")
+  field(DG2E, "Disabled")
+  field(DG3E, "Disabled")
+  field(OT0B, "Disabled")
+  field(OT1B, "Disabled")
+  field(OT2B, "Disabled")
+  field(OT3B, "Disabled")
+  field(OT4B, "Disabled")
+  field(OT5B, "Disabled")
+  field(OT6B, "Disabled")
+  field(OT7B, "Disabled")
+  field(OT0W, "$(PulseWidth)")
+  field(OT1W, "$(PulseWidth)")
+  field(OT2W, "$(PulseWidth)")
+  field(OT3W, "$(PulseWidth)")
+  field(OT4W, "$(PulseWidth)")
+  field(OT5W, "$(PulseWidth)")
+  field(OT6W, "$(PulseWidth)")
+  field(OT7W, "$(PulseWidth)")
+  field(OT8W, "$(PulseWidth)")
+  field(OT9W, "$(PulseWidth)")
+  field(OTAW, "$(PulseWidth)")
+  field(OTBW, "$(PulseWidth)")
+  field(OTCW, "$(PulseWidth)")
+  field(OTDW, "$(PulseWidth)")
+  field(OT0D, "0")
+  field(OT2D, "0")
+  field(OT4D, "0")
+  field(OT5D, "0")
+  field(OT6D, "0")
+  field(OT8D, "0")
+  field(OT9D, "0")
+#OTP0 - FPSn=11=0x0B
+#erEvt:gunT - ENM=24, OUT0 to OUT9
+  field(FPS0, "0x0B")
+#OTPA - FPSn=21=0x15, 
+#erEvt:bkt0 - ENM=21, OUTA, OUTB
+  field(FPS1, "21")
+#erEvt:Kly - ENM=28, OUTC, OUTD
+  field(FPS2, "23")
+  field(FPS3, "19")
+#Dbus6, 
+#  field(FPS3, "38")
+#Dbus7
+  field(FPS4, "39")
+  field(FPS5, "0x0C")
+  field(FPS6, "0x0C")
+}
+
+record(erevent, "$(SUBSYS):$(DEVICE):erEvt:gunT") {
+  field(DTYP, "APS event receiver")
+  field(OUT, "#C$(ERslot) S0 @")
+  field(ENAB, "Enabled")
+  field(ENM, "0x24")
+  field(PINI, "YES")
+  field(PRIO, "LOW")
+  field(SCAN, "Passive")
+  field(OUT0, "Enabled")
+  field(OUT1, "Enabled")
+  field(OUT2, "Enabled")
+  field(OUT3, "Enabled")
+  field(OUT4, "Enabled")
+  field(OUT5, "Enabled")
+  field(OUT6, "Enabled")
+  field(OUT7, "Enabled")
+  field(VME, "Enabled")
+}
+
+record(erevent, "$(SUBSYS):$(DEVICE):erEvt:ram0") {
+  field(DTYP, "APS event receiver")
+  field(OUT, "#C$(ERslot) S0 @")
+  field(ENAB, "Enabled")
+  field(ENM, "0x20")
+  field(PINI, "YES")
+  field(PRIO, "LOW")
+  field(SCAN, "Passive")
+  field(OUT8, "Enabled")
+  field(OUT9, "Enabled")
+  field(VME, "Enabled")
+}
+
+record(erevent, "$(SUBSYS):$(DEVICE):erEvt:bkt0") {
+  field(DTYP, "APS event receiver")
+  field(OUT, "#C$(ERslot) S0 @")
+  field(ENAB, "Enabled")
+  field(ENM, "0x21")
+  field(PINI, "YES")
+  field(PRIO, "LOW")
+  field(SCAN, "Passive")
+  field(OUTA, "Enabled")
+  field(OUTB, "Enabled")
+  field(VME, "Enabled")
+}
+
+record(erevent, "$(SUBSYS):$(DEVICE):erEvt:kck") {
+  field(DTYP, "APS event receiver")
+  field(OUT, "#C$(ERslot) S0 @")
+  field(ENAB, "Enabled")
+  field(ENM, "0x22")
+  field(PINI, "YES")
+  field(PRIO, "LOW")
+  field(SCAN, "Passive")
+  field(VME, "Enabled")
+}
+
+record(erevent, "$(SUBSYS):$(DEVICE):erEvt:kly") {
+  field(DTYP, "APS event receiver")
+  field(OUT, "#C$(ERslot) S0 @")
+  field(ENAB, "Enabled")
+  field(ENM, "0x28")
+  field(PINI, "YES")
+  field(PRIO, "LOW")
+  field(SCAN, "Passive")
+  field(OUTC, "Enabled")
+  field(OUTD, "Enabled")
+  field(VME, "Enabled")
+}
+
+
+#! leige, BEPCII Linac main evr for 16 klystrons, e+ source, pulser power supply
+#! use 3 EVRs
+

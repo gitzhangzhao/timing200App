@@ -1,0 +1,58 @@
+
+record(ai,"$(SUBSYS):$(DEVICE):ai:k1Delay") {
+   field(PREC, "0")
+   field(SCAN,"Passive")
+   field(FLNK, "$(SUBSYS):$(DEVICE):calc:k1Delay")
+   field(VAL, "1")
+}
+
+record(calcout,"$(SUBSYS):$(DEVICE):calc:k1Delay") {
+   field(PREC, "0")
+   field(SCAN,"Passive")
+   field(CALC, "FLOOR(A / 10)")
+   field(INPA, "$(SUBSYS):$(DEVICE):ai:k1Delay.VAL NPP")
+   field(OUT, "$(SUBSYS):$(DEVICE):er.OT4D")
+   field(OOPT, "Every Time")
+   field(FLNK, "$(SUBSYS):$(DEVICE):calc:k1FD")
+}
+
+# set fine delay for k1 by setting td4v, step is 2 ns
+record(calcout,"$(SUBSYS):$(DEVICE):calc:k1FD") {
+   field(PREC, "0")
+   field(SCAN,"Passive")
+   field(CALC, "CEIL((A % 10) / 2)")
+   field(INPA, "$(SUBSYS):$(DEVICE):ai:k1Delay NPP")
+   field(OUT, "R:TM:KeTd4_1:PRESET PP")
+   field(OOPT, "Every Time")
+   field(VAL, "1")
+}
+
+record(ai,"$(SUBSYS):$(DEVICE):ai:k2Delay") {
+   field(PREC, "0")
+   field(SCAN,"Passive")
+   field(FLNK, "$(SUBSYS):$(DEVICE):calc:k2Delay")
+   field(VAL, "1")
+}
+
+record(calcout,"$(SUBSYS):$(DEVICE):calc:k2Delay") {
+   field(PREC, "0")
+   field(SCAN,"Passive")
+   field(CALC, "FLOOR(A / 10)")
+   field(INPA, "$(SUBSYS):$(DEVICE):ai:k2Delay.VAL NPP")
+   field(OUT, "$(SUBSYS):$(DEVICE):er.OT5D")
+   field(OOPT, "Every Time")
+   field(FLNK, "$(SUBSYS):$(DEVICE):calc:k2FD")
+}
+
+# set fine delay for k1 by setting td4v, step is 2 ns
+record(calcout,"$(SUBSYS):$(DEVICE):calc:k2FD") {
+   field(PREC, "0")
+   field(SCAN,"Passive")
+   field(CALC, "CEIL((A % 10) / 2)")
+   field(INPA, "$(SUBSYS):$(DEVICE):ai:k2Delay NPP")
+   field(OUT, "R:TM:KeTd4_2:PRESET PP")
+   field(OOPT, "Every Time")
+   field(VAL, "1")
+}
+
+

@@ -1,0 +1,2 @@
+device(eg,VME_IO,devEg,"APS event generator G")
+device(egevent,VME_IO,devEgEvent,"APS event generator E")

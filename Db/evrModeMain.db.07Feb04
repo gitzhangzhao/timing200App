@@ -1,0 +1,55 @@
+
+#sub-harmonic buncher mode, i.e. dual bunches njection mode
+record(bo, "$(SUBSYS):$(DEVICE):bo:SHBmode")
+{
+        field(SCAN, "Passive")
+        field(VAL, "0")
+}
+
+record(bo, "$(SUBSYS):$(DEVICE):bo:pInj") {
+
+}
+record(ao, "$(SUBSYS):$(DEVICE):ao:ele") {
+#0: no injection; 1: inject e+; -1: inject e-
+}
+
+record(bo, "$(SUBSYS):$(DEVICE):ai:every") {
+#inj 1 bucket every n bunches of linac
+	field(VAL, "1")
+}
+
+
+record(bo, "$(SUBSYS):$(DEVICE):bo:sInj") {
+
+}
+record(ai, "$(SUBSYS):$(DEVICE):ai:bktSelect")
+{
+   field(VAL, "1")
+}
+record(ai, "$(SUBSYS):$(DEVICE):ai:injTimes")
+{
+   field(VAL, "10")
+}
+record(ai, "$(SUBSYS):$(DEVICE):ai:bktRate")
+{
+   field(VAL, "10")
+}
+
+record(genSub, "$(SUBSYS):$(DEVICE):gSub:bktR")
+{
+    field(INAM, "TMsubBktInit")
+    field(SNAM, "TMsubBktProcess")
+
+}
+
+record(calcout, "$(SUBSYS):$(DEVICE):cout:bktRate")
+{
+   field(VAL, "10")
+}
+
+record(dfanout, "$(SUBSYS):$(DEVICE):fout:bktRate")
+{
+   field(VAL, "10")
+}
+
+

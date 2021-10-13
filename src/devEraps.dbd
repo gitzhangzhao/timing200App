@@ -1,0 +1,3 @@
+device(er,VME_IO,devEr,"APS event receiver")
+device(erevent,VME_IO,devErevent,"APS event receiver")
+device(event,VME_IO,devErEpicsEvent,"APS event receiver")

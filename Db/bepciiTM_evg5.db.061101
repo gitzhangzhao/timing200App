@@ -1,0 +1,111 @@
+
+record(eg, "$(SUBSYS):$(DEVICE):eg") {
+  field(DTYP, "APS event generator G")
+  field(OUT, "#C$(EGslot) S0 @")
+  field(FIFO, "NO")
+  field(MOD1, "Alternate")
+  field(MOD2, "Alternate")
+  field(SCAN, "Passive")
+  field(ENAB, "YES")
+  field(PINI, "YES")
+  field(ETE0, "YES")
+  field(ET0, "0x7C")
+  field(ETE1, "YES")
+  field(ET1, "0x01")
+  field(ETE2, "NO")
+  field(ET2, "0x0")
+  field(ETE3, "NO")
+  field(ET3, "0x0")
+  field(ETE4, "NO")
+  field(ET4, "0x36")
+  field(ETE5, "NO")
+  field(ET5, "0x0")
+  field(ETE6, "NO")
+  field(ET6, "0x0")
+  field(ETE7, "NO")
+  field(ET7, "0x0")
+  field(R1CK, "7")
+  field(R2CK, "7")
+  field(ASYN, "YES")
+  field(ASQ1, "YES")
+  field(AEV0, "NO")
+  field(ADIV, "1")
+#  field(MD0E, "YES")
+#  field(MC0P, "402")
+  field(ME0E, "YES")
+  field(MC0P, "100000")
+  field(ME1E, "YES")
+  field(MC1P, "100000000")
+  field(MD5E, "YES")
+#to generate 10MHz clock
+  field(MC5P, "10")
+  field(MD6E, "YES")
+#Dbus6 - 248.66KHz
+#Dbus7 - 35.52KHz
+  field(MC6P, "402")
+  field(MD7E, "YES")
+# MC7P=402*7
+  field(MC7P, "2814")
+}
+
+# By divider==5, one step of seqRam is 70.03ns, 
+record(egevent, "$(SUBSYS):$(DEVICE):egEvt:ram0") {
+  field(DTYP, "APS event generator E")
+  field(OUT, "#C$(EGslot) S0 @")
+  field(ENM, "0x20")
+  field(RAM, "0")
+  field(DELY, "0")
+  field(SCAN, "Passive")
+  field(UNIT, "Clock Ticks")
+  field(PINI, "YES")
+  field(VAL, "0")
+}
+
+record(egevent, "$(SUBSYS):$(DEVICE):egEvt:bkt0") {
+  field(DTYP, "APS event generator E")
+  field(OUT, "#C$(EGslot) S0 @")
+  field(ENM, "0x21")
+  field(RAM, "0")
+  field(DELY, "1")
+  field(SCAN, "Passive")
+  field(UNIT, "Clock Ticks")
+  field(PINI, "YES")
+  field(VAL, "0")
+}
+
+record(egevent, "$(SUBSYS):$(DEVICE):egEvt:gunT") {
+  field(DTYP, "APS event generator E")
+  field(OUT, "#C$(EGslot) S0 @")
+  field(ENM, "0x24")
+  field(RAM, "0")
+  field(DELY, "2")
+  field(SCAN, "Passive")
+  field(UNIT, "Clock Ticks")
+  field(PINI, "YES")
+  field(VAL, "0")
+}
+
+record(egevent, "$(SUBSYS):$(DEVICE):egEvt:Kly") {
+  field(DTYP, "APS event generator E")
+  field(OUT, "#C$(EGslot) S0 @")
+  field(ENM, "0x28")
+  field(RAM, "0")
+  field(DELY, "3")
+  field(SCAN, "Passive")
+  field(UNIT, "Clock Ticks")
+  field(PINI, "YES")
+  field(VAL, "0")
+}
+
+record(egevent, "$(SUBSYS):$(DEVICE):egEvt:kck") {
+  field(DTYP, "APS event generator E")
+  field(OUT, "#C$(EGslot) S0 @")
+  field(ENM, "0x22")
+  field(RAM, "0")
+  field(DELY, "4")
+  field(SCAN, "Passive")
+  field(UNIT, "Clock Ticks")
+  field(PINI, "YES")
+  field(VAL, "0")
+}
+

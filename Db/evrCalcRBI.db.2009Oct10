@@ -1,0 +1,82 @@
+# 2007 Feb 27, leige for RBI libera timing
+
+record(calcout,"R:TM:RBIEvr2:cout:delyE") {
+   field(PREC, "0")
+   field(SCAN,"1 second")
+   field(CALC, "(A*10+B*2+C+D+E+F+G)/10")
+   field(INPA, "R:TM:KeEvr:er.OT5D NPP")
+   field(INPB, "R:TM:KeTd4_2:PRESET NPP")
+# INPC is kicker2 system delay
+#INPD is the time of electron travel from R4OEK to R4OBPM12
+#INPE is the delay of BI cable from libera to buttons in beamline
+#INPF is for manual adjustment
+# INPG is -400, get signal -400ns earlier than the beam comes
+   field(INPC, "1720")
+   field(INPD, "27")
+   field(INPE, "234")
+   field(INPG, "-400")
+# 2009Oct08
+#   field(INPH, "L:TM:GunEvr:er.OT1D")
+   field(OUT, "R:TM:RBIEvr2:er.OT0D")
+}
+
+record(calcout,"R:TM:RBIEvr2:cout:delyP") {
+   field(PREC, "0")
+   field(SCAN,"1 second")
+   field(CALC, "(A*10+B*2+C+D+E+F+G)/10")
+   field(INPA, "R:TM:KpEvr:er.OT5D NPP")
+   field(INPB, "R:TM:KpTd4_2:PRESET NPP")
+# INPC is kicker2 system delay. 
+# INPC: 1703 is measured in Oct 2006, 1981 is measure in Feb 2007
+#INPD is the time of electron travel from R4OEK to R4OBPM12
+#INPE is the delay of BI cable from libera to buttons in beamline
+#INPF is for manual adjustment
+# INPG is -400, get signal -400ns earlier than the beam comes
+#   field(INPC, "1981")
+   field(INPC, "1703")
+   field(INPD, "27")
+   field(INPE, "234")
+   field(INPG, "-400")
+# 2009Oct08
+#   field(INPH, "L:TM:GunEvr:er.OT1D")
+   field(OUT, "R:TM:RBIEvr2:er.OT1D")
+}
+
+record(calcout,"R:TM:RBIEvr2:cout:trigE") {
+   field(PREC, "0")
+   field(SCAN,"1 second")
+   field(CALC, "(A>D)?B:C")
+   field(INPC, "R:TM:RBIEvr2:er.OTP2")
+#   field(OUT, "R:TM:RBIEvr2:er.OTP0")
+   field(OUT, "R:TM:RBIEvr2:fout:fE PP")
+   field(INPA, "1")
+   field(INPD, "0")
+}
+
+record(calcout,"R:TM:RBIEvr2:cout:trigP") {
+   field(PREC, "0")
+   field(SCAN,"1 second")
+# INPA and INPB come from OPI
+   field(CALC, "(A>D)?B:C")
+# OUTP3 will go with kicker P
+   field(INPC, "R:TM:RBIEvr2:er.OTP3")
+   field(OUT, "R:TM:RBIEvr2:fout:fP PP")
+   field(INPA, "1")
+   field(INPD, "0")
+}
+
+record(dfanout, "R:TM:RBIEvr2:fout:fE")
+{
+   field(SCAN,"Passive")
+   field(OMSL, "closed_loop")
+   field(OUTA, "R:TM:RBIEvr2:er.OTP0")
+}
+
+record(dfanout, "R:TM:RBIEvr2:fout:fP")
+{
+   field(SCAN,"Passive")
+   field(OMSL, "closed_loop")
+   field(OUTA, "R:TM:RBIEvr2:er.OTP1")
+}
+
+

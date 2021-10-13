@@ -1,0 +1,227 @@
+# leige for BEPC-II linac timing
+# 2006/9/27, set OTP0-OPTD to Disabled at init, each station enable the trig 
+# outputs according to their needs
+# record(er, "$(SUBSYS):$(DEVICE):er$(No)")
+# L:TM:KlyEvr_n:er
+# evrGun.db, 2008Jun25, to seperate trigs of Kly and gunT into 2 db files
+#OTP2 is for SolidStateAmp
+#OTP4 is for PSK
+#OTP1 is for gun ch1and ch2
+#
+# 2009Sep19 for SHB1 and SHB2, 
+#
+# 2017Aug30, move the triggers of gun-PS and e+PS from timingKly to timing102
+# OTP2 - gunPS,  OTP3 - e+PS, 
+# OTP4,5,6,7 - SHB
+# OTP8 - solidStateAmplifier, OTP9 - PSK
+# OTP0 - pulser trigger1, OTP1 - pulser trigger2
+#
+# FPSn setting: OTP0 - 11=0x0B
+#               OTP1 - 12
+#               OTP2 - 13
+#               OTP3 - 14
+#               OTP4 - 15
+#               OTP5 - 16
+#               OTP6 - 17
+#               OTP7 - 18
+#               OTP8 - 19
+#               OTP9 - 20
+#               OTPA - 21 = 0x15
+#               OTPB - 22
+#               OTPC - 23
+#               OTPD - 24
+#               dbus0 -32 = 0x20 
+#               dbus1 -33 = 0x21 
+#               dbus2 -34 = 0x22 
+#               dbus3 -35 = 0x23 
+#               dbus4 -36 = 0x24 
+#               dbus5 -37 = 0x25 
+#               dbus6 -38 = 0x26 
+#               dbus7 -39 = 0x27 
+#
+# solidStateAmp, old setting: OTP2, FPS2 = 13
+#                new setting: OTP8, FPS2 = 19
+# PSK, old setting: OPT4, FPS3 = 15
+#      new setting: OTP9, FPS3 = 20 
+# 
+#
+# 2017-9-13, check delay settings 
+# pulserPS, or say gunPS, delay was 8200 when listen event number Kly
+#           now still listen to event number Kly
+# e+PS, delay was 8105 when listen event number Kly
+#           now still listen to event number Kly
+#       The fibre lengths are the same, so the delay values keep unchanged
+#
+
+# 2019Dec03, port #2 of transition board of evr, seems not working, 
+# this port has been used to trig gunPS (gun's high voltage pulse power supply)
+# so don't use this port, now use port #1 to trig gunPS
+# then set FPS4, from 12 to 13, i.e. from OTP1 to OTP2
+# evr's FPS4 has been used to trig GunTX module's channel1
+# note: port #0 (the right most port) of transition board is still not used
+# 
+
+record(er, "$(SUBSYS):$(DEVICE):er") {
+  field(DTYP, "APS event receiver")
+  field(OUT, "#C$(ERslot) S0 @")
+  field(ENAB, "YES")
+  field(PINI, "YES")
+  field(SCAN, "Passive")
+  field(TRG0, "Disabled")
+  field(TRG1, "Disabled")
+  field(TRG2, "Disabled")
+  field(TRG3, "Disabled")
+  field(TRG4, "Disabled")
+  field(TRG5, "Disabled")
+  field(TRG6, "Disabled")
+  field(OTP0, "Enabled")
+  field(OTP1, "Enabled")
+  field(OTP2, "Enabled")
+  field(OTP3, "Enabled")
+  field(OTP4, "Enabled")
+  field(OTP5, "Enabled")
+  field(OTP6, "Enabled")
+  field(OTP7, "Enabled")
+  field(OTP8, "Enabled")
+  field(OTP9, "Enabled")
+  field(OTPA, "Enabled")
+  field(OTPB, "Enabled")
+  field(OTPC, "Enabled")
+  field(OTPD, "Enabled")
+  field(OTL0, "Disabled")
+  field(OTL1, "Disabled")
+  field(OTL2, "Disabled")
+  field(OTL3, "Disabled")
+  field(OTL4, "Disabled")
+  field(OTL5, "Disabled")
+  field(OTL6, "Disabled")
+  field(DG0E, "Disabled")
+  field(DG1E, "Disabled")
+  field(DG2E, "Disabled")
+  field(DG3E, "Disabled")
+  field(OT0B, "Disabled")
+  field(OT1B, "Disabled")
+  field(OT2B, "Disabled")
+  field(OT3B, "Disabled")
+  field(OT4B, "Disabled")
+  field(OT5B, "Disabled")
+  field(OT6B, "Disabled")
+  field(OT7B, "Disabled")
+  field(OT0W, "$(PulseWidth)")
+  field(OT1W, "$(PulseWidth)")
+  field(OT2W, "$(PulseWidth)")
+  field(OT3W, "$(PulseWidth)")
+  field(OT4W, "$(PulseWidth)")
+  field(OT5W, "$(PulseWidth)")
+  field(OT6W, "$(PulseWidth)")
+  field(OT7W, "$(PulseWidth)")
+  field(OT8W, "$(PulseWidth)")
+  field(OT9W, "$(PulseWidth)")
+  field(OTAW, "$(PulseWidth)")
+  field(OTBW, "$(PulseWidth)")
+  field(OTCW, "$(PulseWidth)")
+  field(OTDW, "$(PulseWidth)")
+  field(OT0D, "8916")
+  field(OT1D, "8000")
+  field(OT2D, "8200")      # gunPS
+  field(OT3D, "8105")      # e+PS
+  field(OT4D, "2500")
+  field(OT5D, "2500")
+  field(OT6D, "2500")
+  field(OT7D, "2500")
+  field(OT8D, "8487")  # solidStateAmp
+  field(OT9D, "8810")  # PSK
+  field(FPS0, "0x0B")
+  field(FPS1, "11")
+# 2009Sep20 FPS2 for SolidStateAmp, 13
+#           FPS3 for PSK, 15
+#  field(FPS2, "13")
+#  field(FPS3, "15")
+# 2017Aug31 FPS2 for SolidStateAmp, OTP8, 19
+#           FPS3 for PSK, otp9, 20
+# the hardware connection of EVR230 front panel keep unchanged 
+  field(FPS2, "19")
+  field(FPS3, "20")
+
+# field(FPS4, "12")
+# field(FPS5, "12")
+# 2019Dec03, FPS4 for gunTX channel1, now set to 13, i.e. OTP2
+# FPS5 for gunTX channel2, now set to 11, i.e. OTP0
+  field(FPS4, "13")
+  field(FPS5, "11") 
+# be careful, when using evr230
+}
+
+#erEvt:gunT - ENM=24, OUT0 to OUT1
+record(erevent, "$(SUBSYS):$(DEVICE):erEvt:gunT") {
+  field(DTYP, "APS event receiver")
+  field(OUT, "#C$(ERslot) S0 @")
+  field(ENAB, "Enabled")
+  field(ENM, "0x24")
+  field(PINI, "YES")
+  field(PRIO, "LOW")
+  field(SCAN, "Passive")
+  field(OUT0, "Enabled")
+  field(OUT1, "Enabled")
+  field(OUT2, "Enabled")
+  field(OUT3, "Enabled")
+  field(VME, "Enabled")
+}
+
+#erEvt:Kly - ENM=28, OUT2 to OUT9
+record(erevent, "$(SUBSYS):$(DEVICE):erEvt:kly") {
+  field(DTYP, "APS event receiver")
+  field(OUT, "#C$(ERslot) S0 @")
+  field(ENAB, "Enabled")
+  field(ENM, "0x28")
+  field(PINI, "YES")
+  field(PRIO, "LOW")
+  field(SCAN, "Passive")
+  field(OUT4, "Enabled")
+  field(OUT5, "Enabled")
+  field(OUT6, "Enabled")
+  field(OUT7, "Enabled")
+  field(OUT8, "Enabled")
+  field(OUT9, "Enabled")
+  field(VME, "Enabled")
+}
+
+#erEvt:bkt0 - ENM=21, OUTA, OUTB
+record(erevent, "$(SUBSYS):$(DEVICE):erEvt:bkt0") {
+  field(DTYP, "APS event receiver")
+  field(OUT, "#C$(ERslot) S0 @")
+  field(ENAB, "Enabled")
+  field(ENM, "0x21")
+  field(PINI, "YES")
+  field(PRIO, "LOW")
+  field(SCAN, "Passive")
+  field(OUTA, "Enabled")
+  field(OUTB, "Enabled")
+  field(VME, "Enabled")
+}
+
+record(erevent, "$(SUBSYS):$(DEVICE):erEvt:ram0") {
+  field(DTYP, "APS event receiver")
+  field(OUT, "#C$(ERslot) S0 @")
+  field(ENAB, "Enabled")
+  field(ENM, "0x20")
+  field(PINI, "YES")
+  field(PRIO, "LOW")
+  field(SCAN, "Passive")
+  field(OUTC, "Enabled")
+  field(OUTD, "Enabled")
+  field(VME, "Enabled")
+}
+
+record(erevent, "$(SUBSYS):$(DEVICE):erEvt:kck") {
+  field(DTYP, "APS event receiver")
+  field(OUT, "#C$(ERslot) S0 @")
+  field(ENAB, "Enabled")
+  field(ENM, "0x22")
+  field(PINI, "YES")
+  field(PRIO, "LOW")
+  field(SCAN, "Passive")
+  field(VME, "Enabled")
+}
+
+

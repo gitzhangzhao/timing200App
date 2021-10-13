@@ -1,0 +1,17 @@
+#to enable / disable all trigs for timingKly station
+record(bo, "L:TM:Kly:bo:startAll")
+{
+        field(SCAN, "Passive")
+        field(FLNK, "L:TM:Kly:fout:enaAll")
+}
+
+record(dfanout, "L:TM:Kly:fout:enaAll")
+{
+        field(SCAN, "Passive")
+        field(OMSL, "closed_loop")
+        field(DOL, "L:TM:Kly:bo:startAll")
+        field(OUTA, "L:TM:KlyEvr1:bo:start PP")
+        field(OUTB, "L:TM:KlyEvr2:bo:start PP")
+        field(OUTC, "L:TM:KlyEvr3:bo:start PP")
+}
+

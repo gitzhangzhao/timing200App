@@ -1,0 +1,33 @@
+
+record(event, "$(SUBSYS):$(DEVICE):event40Kly")
+{
+field(SCAN, "I/O Intr")
+field(PINI, "NO")
+#field(EVNT, "40")
+field(DTYP, "APS event receiver")
+field(DISV, "1")
+field(SDIS, "0")
+field(FLNK, "$(SUBSYS):$(DEVICE):calc40Kly PP MS")
+field(INP, "#C$(ERslot) S40 @")
+field(VAL, "40")
+}
+record(calc,"$(SUBSYS):$(DEVICE):calc40Kly") {
+                field(PREC, "0")
+                field(SCAN,"Passive")
+                field(EVNT, "40")
+                field(CALC, "(A<B)?(A+C):D")
+                field(INPA, "$(SUBSYS):$(DEVICE):calc40Kly.VAL NPP MS")
+                field(INPB, "4")
+                field(INPC, "1")
+                field(INPD, "0")
+		field(FLNK, "$(SUBSYS):$(DEVICE):calc36GunT PP")
+}
+record(calcout,"$(SUBSYS):$(DEVICE):calc36GunT") {
+                field(PREC, "0")
+                field(SCAN,"Passive")
+                field(CALC, "(A=0)?36:0")
+                field(INPA, "$(SUBSYS):$(DEVICE):calc40Kly.VAL NPP MS")
+		field(OUT, "$(SUBSYS):M1Evg:egEvt:gunT.ENM PP")
+}
+
+

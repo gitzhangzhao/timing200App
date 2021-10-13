@@ -1,0 +1,50 @@
+
+record(event, "$(SUBSYS):$(DEVICE):event:gunT")
+{
+field(DESC, "")
+field(ASG, "")
+field(SCAN, "I/O Intr")
+field(PINI, "NO")
+field(PHAS, "0")
+field(EVNT, "0")
+field(TSE, "0")
+field(TSEL, "0")
+field(DTYP, "APS event receiver")
+field(DISV, "1")
+field(SDIS, "0")
+field(DISS, "NO_ALARM")
+field(PRIO, "LOW")
+field(FLNK, "$(SUBSYS):$(DEVICE):calc:genSub PP MS")
+field(INP, "#C$(ERslot) S36 @")
+field(SIOL, "0")
+field(SIML, "0")
+field(SIMS, "NO_ALARM")
+#field(VAL, "125")
+}
+
+
+record(calc,"$(SUBSYS):$(DEVICE):calc:genSub") {
+    field(PREC, "0")
+    field(SCAN,"Passive")
+    field(CALC, "(A<B)?(A+C):D")
+    field(INPA, "$(SUBSYS):$(DEVICE):calc:genSub.VAL NPP MS")
+    field(INPB, "10000")
+    field(INPC, "1")
+    field(INPD, "0")
+    field(FLNK, "$(SUBSYS):$(DEVICE):genSub:time")
+}
+
+record(genSub, "$(SUBSYS):$(DEVICE):genSub:time") {
+    field(DESC, "recordCalc4Time")
+    field(SCAN, "Passive")
+    field(INAM, "TMsubCalcInit")
+    field(SNAM, "TMsubCalcProcess")
+    field(INPA, "$(SUBSYS):$(DEVICE):calc:genSub.VAL NPP NMS")
+    field(FTA, "STRING")
+    field(FTVA, "DOUBLE")
+    field(FTVB, "STRING") 
+#    field(FLNK, "Pn_dummy2") 
+}
+
+
+

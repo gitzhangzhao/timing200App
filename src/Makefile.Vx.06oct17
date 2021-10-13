@@ -1,0 +1,51 @@
+# Makefile.Vx
+TOP = ../../..
+include $(TOP)/config/CONFIG_APP
+#----------------------------------------
+#  ADD MACRO DEFINITIONS AFTER THIS LINE
+
+SRCS.c += ../devApsEg.c
+SRCS.c += ../devApsEr.c
+SRCS.c += ../egRecord.c
+SRCS.c += ../erRecord.c
+SRCS.c += ../ereventRecord.c
+SRCS.c += ../egeventRecord.c
+SRCS.c += ../vme64x_cr.c
+SRCS.c += ../devMrfGUNTX.c
+SRCS.c += ../genSubRecord.c
+SRCS.c += ../genSubTiming.c
+SRCS.c += ../devTd4v.c
+SRCS.c += ../archRecord.c
+SRCS.h += erRecord.h
+
+LIBOBJS += devApsEg.o
+LIBOBJS += devApsEr.o
+LIBOBJS += egRecord.o
+LIBOBJS += erRecord.o
+LIBOBJS += ereventRecord.o
+LIBOBJS += egeventRecord.o
+LIBOBJS += vme64x_cr.o
+LIBOBJS += devMrfGUNTX.o
+LIBOBJS += genSubRecord.o
+LIBOBJS += genSubTiming.o
+LIBOBJS += genSubBkt.o
+LIBOBJS += devTd4v.o
+LIBOBJS += archRecord.o
+
+#LIBOBJS += sncBktMain.o
+LIBOBJS += sncBkt2.o
+
+#SNCFLAGS += +r
+SNCFLAGS += -c
+
+include ../baseLIBOBJS
+
+LIBNAME = EvgEvrTd4vLib
+INSTALLS += iocCore seq
+
+#Note that the command line that builds the
+#library $(LIBNAME) may be HUGE (>3kB)
+#
+include $(TOP)/config/RULES.Vx
+#----------------------------------------
+#  ADD RULES AFTER THIS LINE

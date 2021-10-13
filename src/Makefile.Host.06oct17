@@ -1,0 +1,44 @@
+# Makefile.Host
+TOP = ../../..
+include $(TOP)/config/CONFIG_APP
+#----------------------------------------
+#  ADD MACRO DEFINITIONS AFTER THIS LINE
+
+RECTYPES += erRecord.h   
+#DBDINC += erRecord.dbd
+#DBDINC += egeventRecord.dbd
+RECTYPES += egeventRecord.h  
+RECTYPES += ereventRecord.h
+RECTYPES += archRecord.h 
+RECTYPES += genSubRecord.h
+DBDINC += menuGenSub.dbd
+#DBDEXPAND = exampleInclude.dbd
+#DBDNAME = exampleApp.dbd
+#DBDNAME = evgevr.dbd
+
+DBDINSTALL = evgevr.dbd
+evgevr.dbd: ../egRecord.dbd ../erRecord.dbd ../egeventRecord.dbd ../ereventRecord.dbd ../devEgaps.dbd ../devEraps.dbd ../genSubRecord.dbd ../menuGenSub.dbd
+	cat ../egRecord.dbd ../erRecord.dbd ../egeventRecord.dbd ../ereventRecord.dbd ../devEgaps.dbd ../devEraps.dbd ../genSubRecord.dbd ../menuGenSub.dbd> evgevr.dbd
+
+
+#USR_CFLAGS += 
+PROD_LIBS	+= ca
+PROD_LIBS	+= Db
+PROD_LIBS	+= Com
+ca_DIR  = $(EPICS_BASE_LIB)
+Db_DIR  = $(EPICS_BASE_LIB)
+Com_DIR = $(EPICS_BASE_LIB)
+
+PROD += caExample
+caExample_SRCS = caExample.c
+
+#LDFLAGS += -L$(EPICS_EXTENSIONS)/lib/solaris/ -lezcaScan
+#PROD +=  ezcaExam
+#caExample_SRCS =  ezcaExam.c
+
+include $(TOP)/config/RULES.Host
+#----------------------------------------
+#  ADD RULES AFTER THIS LINE
+
+
+
